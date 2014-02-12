@@ -1,0 +1,78 @@
+<html>
+<head>
+<script>
+var count=60;
+
+var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+var num1 = Math.floor((Math.random()*9)+0);
+var num2 = Math.floor((Math.random()*9)+0);
+var answer = num1 + num2;
+var enteredAnswer = "";
+var numberAnswered = 0;
+
+function timer()
+{
+  count=count-1;
+  if (count <= 0)
+  {
+     clearInterval(counter);
+     alert('you answered ' + numberAnswered);
+     return;
+  }
+
+ document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
+ document.getElementById("numOne").innerHTML=num1;
+ document.getElementById("numTwo").innerHTML=num2;
+}
+
+function checkAnswer(e){
+	enteredAnswer = e.value;
+	if(enteredAnswer.toString() === answer.toString()){
+		e.value = "";
+		nextQuestion();
+	}
+	
+}
+
+function nextQuestion(){
+	num1 = Math.floor((Math.random()*9)+0);
+	num2 = Math.floor((Math.random()*9)+0);
+	answer = num1 + num2;
+	enteredAnswer = "";
+	numberAnswered++;
+	document.getElementById("numOne").innerHTML=num1;
+ 	document.getElementById("numTwo").innerHTML=num2;
+}
+
+</script>
+<style type="text/css">
+	#wrapper{
+		width: 300px;
+		margin: 0 auto;
+	}
+	h1 {
+		font-size: 48px;
+	}
+	#timer{
+		text-align: center;
+		margin: 0 auto;
+		font-size: 30px;
+		border: 1px;
+	}
+</style>
+</head>
+<body>
+	<div id="wrapper">
+		<h1>Fast Math</h1>
+		<div id="timer"></div>
+		<br/>
+		<br/>
+		<span id="numOne"></span>
+		<br/>
+		<span id="numTwo"></span>
+		<br/>
+		<input type="text" id="answer" value="" autofocus onkeyup="checkAnswer(this)">
+	</div>
+</body>
+
+</html>
